@@ -28,8 +28,16 @@ THE SOFTWARE.
     var users = new Array();
     var userNames = new Array();
 
+	/**
+	 * scrolls down
+	 */
+	function scrollDown() {
+		$(document).scrollTop($(document).height());
+	}
+
     function printStatusMessage(statusMsg) {
         $('#messages').append("<br />[INFO] <span class=\"status\">" + statusMsg + "</span><br />");
+		scrollDown();
     }
 
     function updateUserList() {
@@ -49,7 +57,6 @@ THE SOFTWARE.
     /**
      * initializes the socket connection
      */
-
     function initSockets() {
         socket = io.connect(URL, {
                 port: PORT
@@ -81,6 +88,7 @@ THE SOFTWARE.
         });
         socket.on('chatUpdate', function (msg) {
             $('#messages').append(formatMsg(getFormattedTimeString(msg.date), userNames[users.indexOf(msg.id)], msg.msg, msg.id == id));
+			scrollDown();
         });
         socket.on('nameChange', function (msg) {
             printStatusMessage("'" + userNames[users.indexOf(msg.id)] + "' set name to '" + msg.name + "'");
@@ -90,15 +98,11 @@ THE SOFTWARE.
                 $("#popupName").show();
             }
         });
-        socket.on('printCommands', function (msg) {
-            printCommands();
-        });
     }
 
     /**
      * submit message handler
      */
-
     function submitMessage() {
         var msg = filter($('#newMessage').val().substr(0, 100));
         if (msg && msg != "") {
@@ -114,7 +118,6 @@ THE SOFTWARE.
     /**
      * submit name handler
      */
-
     function submitName() {
         var name = filter($('#newName').val().substr(0, 100));
         if (name && name != "") {
@@ -130,7 +133,6 @@ THE SOFTWARE.
     /**
      * sets up handlers
      */
-
     function setupHandlers() {
         $(document).click(function () {
             $("#popupName").hide();
@@ -153,8 +155,17 @@ THE SOFTWARE.
             }
         });
 
-        printStatusMessage("Welcome to the Chat!<br />Your current name is '" + userNames[users.indexOf(id)] + "'");
-        $('#newMessage').focus();
+        printStatusMessage("Welcome to the Chat!");
+
+		$('#chat').on('pageshow', function() {
+			scrollDown();
+        	printStatusMessage("Your current name is '" + userNames[users.indexOf(id)] + "'");
+        	$('#newMessage').focus();
+		});
+
+		$('#changename').on('pageshow', function() {
+        	$('#newName').focus();
+		});
     }
 
     // DOM ready
