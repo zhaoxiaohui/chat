@@ -1,0 +1,39 @@
+Chat
+----
+
+Author:
+	Denis Meyer, CallToPower Software
+
+Website:
+	https://sites.google.com/site/calltopowersoftware/
+
+Description:
+	A chat (server + client) written in JavaScript using node.js, socket.io, jQuery and jQuery mobile.
+
+Version:
+	- 1.0.0
+
+Libraries:
+	- not included:
+	      - node.js
+	      - socket.io
+	- included:
+	      - jQuery v1.9.1
+	      - jQuery mobile 1.3.1
+	      	- jQuery mobile iOS Theme (https://github.com/taitems/iOS-Inspired-jQuery-Mobile-Theme)
+
+License:
+	The MIT License (MIT), see file "LICENSE"
+
+Debug Start:
+	- go to src/
+	- edit variables in files "server/variables.js" and "client/js/variables.js"
+	- start server via
+	  	node server/server.js
+
+Release:
+	- go to src-release/
+	- edit variables in files "server/variables.js" and "client/js/variables.js"
+	- obfuscate "client/js/*.js", e.g. via http://javascriptobfuscator.com/
+	- start server via
+	  	node server/server.js > log.txt &
