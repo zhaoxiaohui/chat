@@ -163,7 +163,7 @@ THE SOFTWARE.
 
 		$('#chat').on('pageshow', function() {
 			scrollDown();
-        	printStatusMessage("Your current name is '" + userNames[users.indexOf(id)] + "'");
+        	// printStatusMessage("Your current name is '" + userNames[users.indexOf(id)] + "'");
         	$('#newMessage').focus();
 		});
 
