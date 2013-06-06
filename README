@@ -11,7 +11,7 @@ Description:
 	A chat (server + client) written in JavaScript using node.js, socket.io, jQuery and jQuery mobile.
 
 Version:
-	- 1.0.0
+	- 1.0.1
 
 Libraries:
 	- not included:

@@ -24,7 +24,7 @@ THE SOFTWARE.
 (function ($) {
     var socket;
     var id;
-    var activeUsers;
+    var activeUsers = 0;
     var users = new Array();
     var userNames = new Array();
 
@@ -36,9 +36,18 @@ THE SOFTWARE.
 	}
 
     function printStatusMessage(statusMsg) {
-        $('#messages').append("<br />[INFO] <span class=\"status\">" + statusMsg + "</span><br />");
+        $('#messages').append("<div class=\"clear statusMessage\">[INFO] <span class=\"status\">" + statusMsg + "</span></div>");
 		scrollDown();
     }
+
+	function updateUserlistView() {
+		$('#userlistCount').html(activeUsers + "");
+		try {
+			$('#userlistview').listview('refresh');
+		} catch (e) {
+			// not yet initialized
+		}
+	}
 
     function updateUserList() {
 		$("#currentName").html("Your current name is '" + userNames[users.indexOf(id)] + "'");
@@ -46,12 +55,8 @@ THE SOFTWARE.
         for (var i = 0; i < users.length; ++i) {
             var toAppend = "<li>" + formatName(userNames[i], users[i] == id) + "</li>";
             $('#userlistview').append(toAppend);
-            try {
-                $('#userlistview').listview('refresh')
-            } catch (e) {
-                // not yet initialized
-            }
         }
+		updateUserlistView();
     }
 
     /**
@@ -62,7 +67,7 @@ THE SOFTWARE.
                 port: PORT
             });
         socket.on('socketId', function (msg) {
-            activeUsers = msg.activeUsers;
+            activeUsers = msg.activeClients;
             id = msg.id;
             userNames = msg.clientNames;
             users = msg.clients;
@@ -70,18 +75,17 @@ THE SOFTWARE.
             setupHandlers();
         });
         socket.on('userConnected', function (msg) {
-            activeUsers = msg.activeUsers;
+            activeUsers = msg.activeClients;
             if (users.indexOf(msg.id) == -1) {
                 userNames.push(msg.name);
                 users.push(msg.id);
                 printStatusMessage("'" + userNames[users.indexOf(msg.id)] + "' connected");
             }
-            activeUsers = msg.activeUsers;
             updateUserList();
         });
         socket.on('userDisconnected', function (msg) {
             printStatusMessage("'" + userNames[users.indexOf(msg.id)] + "' disconnected");
-            activeUsers = msg.activeUsers;
+            activeUsers = msg.activeClients;
             userNames.splice(users.indexOf(msg.id), 1);
             users.splice(users.indexOf(msg.id), 1);
             updateUserList();

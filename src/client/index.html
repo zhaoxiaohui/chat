@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Chat</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link href="css/jquery-mobile.css" rel="stylesheet" />
         <link href="css/jquery-mobile-ios.css" rel="stylesheet" />
@@ -51,7 +51,7 @@
                 <ul data-role="listview" data-inset="true">
                     <li><a href="#chat">Chat</a></li>
                     <li><a href="#changename">Change name</a></li>
-                    <li><a href="#userlist">User list</a></li>
+                    <li><a href="#userlist">User list <span id="userlistCount" class="ui-li-count"></span></a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
             </div>
@@ -70,8 +70,7 @@
                 </center>
                 <div id="messagesAndSend">
                     <div id="messages"></div>
-					<br />
-                    <div id="send">
+                    <div id="send" class="clear">
                         <input type="text" name="text-basic" id="newMessage" value="" placeholder="Your message">
                         <a data-role="button" class="ui-btn-plain" id="buttonSendMessage">Send</a>
                     </div>
@@ -119,7 +118,7 @@
             <div data-role="content"> 
                 <h3>Chat</h3>
 				<u>Version</u><br />
-				1.0.0
+				1.0.1
 				<br /><br />
                 <u>Author</u><br />
 				Denis Meyer

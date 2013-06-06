@@ -73,8 +73,21 @@ function formatName(name, own) {
  */
 
 function formatMsg(timeString, name, msg, own) {
-    var nameClass = own ? "ownUsername" : "otherUsername";
-    return "<span class=\"time\">" + timeString + "</span> - <span class=\"" + nameClass + "\">" + name + "</span>: <br />" + msg + "<br />";
+    var cssClass = own ? "floatRight clear" : "clear";
+    var cssNameClass = own ? "ownUsername" : "otherUsername";
+    var cssMsgClass = own ? "bubbledRight" : "bubbledLeft";
+	return "<div class=\"formattedMessage " + cssClass + "\">" +
+				"<span class=\"time\">" +
+					timeString +
+				"</span>" +
+				" - " +
+				"<span class=\"" + cssNameClass + "\">" +
+					name +
+				"</span>" +
+			"</div>" +
+			"<div class=\"" + cssMsgClass + "\">" +
+				msg +
+			"</div>";
 }
 
 /**
