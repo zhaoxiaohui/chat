@@ -159,15 +159,6 @@ THE SOFTWARE.
 
     // DOM ready
     $(document).ready(function () {
-
-        // all dialog buttons should close their parent dialog
-        $(".ui-dialog button").on("click", function () {
-            $("[data-role='dialog']").dialog("close");
-        });
-        $(document).bind("mobileinit", function () {
-            $.mobile.defaultPageTransition = "slide";
-        });
-
         initSockets();
     });
 })(jQuery);

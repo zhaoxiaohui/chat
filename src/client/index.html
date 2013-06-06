@@ -10,6 +10,17 @@
         <link href="css/index.css" rel="stylesheet" />
         <script src="/socket.io/socket.io.js"></script>
         <script src="js/jquery/jquery.js"></script>
+		<script>
+			// attention: Include AFTER jQuery but BEFORE jQuery mobile!
+			
+	        // all dialog buttons should close their parent dialog
+	        $(".ui-dialog button").on("click", function () {
+	            $("[data-role='dialog']").dialog("close");
+	        });
+	        $(document).on("mobileinit", function () {
+	            $.mobile.defaultPageTransition = "slide";
+	        });
+		</script>
         <script type="text/javascript" src="js/variables.js"></script>
         <script type="text/javascript" src="js/helper.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
